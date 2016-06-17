@@ -1,0 +1,41 @@
+<div class="container">
+  <h1>We currently have <strong>25,011</strong> job posts but only <strong>10,111</strong> applicants</h1>
+  <form class="form-inline">
+    <input type="text" class="btn-block" autofocus="autofocus" placeholder="Example: Software developer">
+  </form>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-md-3">
+      <h3 class="">Advanced search</h3>
+    </div>
+    <div class="col-xs-12 col-md-9">
+      <h3>Gigs
+        <span class="pull-right"><small>1 - 20 results</small></span>
+      </h3>
+      <table class="table table-striped" >
+        <tbody>
+          <% @gigs.each do |gig| %>
+          <tr>
+            <td>
+              <p>
+                <%= link_to gig.name, gig %>
+                <small class="label label-success">Full time</small>
+              </p>
+              <p>Google enterprises</p>
+            </td>
+            <td>
+              <p><i class="glyphicon glyphicon-calendar"><%= gig.created_at %></i></p>
+              <p><i class="glyphicon glyphicon-map-marker"></i><%= gig.location %></p>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="text-center">
+      <%= paginate @gigs %>
+    </div>
+  </div>
+</div>
