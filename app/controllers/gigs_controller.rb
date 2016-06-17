@@ -21,6 +21,9 @@ class GigsController < ApplicationController
     end
   end
 
+  def search
+    @gigs = Gig.search(params).page(params[:page]).per(25)
+  end
 
   private
     def gig_params
