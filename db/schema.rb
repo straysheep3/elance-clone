@@ -32,6 +32,8 @@ ActiveRecord::Schema.define(version: 20160615050514) do
     t.string   "location"
     t.boolean  "open",             default: true
     t.integer  "awarded_proposal"
+    t.float    "latitude"
+    t.float    "longitude"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "category_id"
@@ -47,9 +49,11 @@ ActiveRecord::Schema.define(version: 20160615050514) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "gig_id"
+    t.integer  "user_id"
   end
 
   add_index "proposals", ["gig_id"], name: "index_proposals_on_gig_id"
+  add_index "proposals", ["user_id"], name: "index_proposals_on_user_id"
 
   create_table "skills", force: :cascade do |t|
     t.string "name"
