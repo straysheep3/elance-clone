@@ -10,6 +10,22 @@
   <div class="row">
     <div class="col-xs-12 col-md-3">
       <h3 class="">Advanced search</h3>
+      <%= form_tag search_gigs_path, method: :get do |f| %>
+        <div class="form-group">
+          <label>Search</label>
+          <%= text_field_tag :search, nil, placeholder: "Developer, Accountant, etc.", class: "form-control input-lg" %>
+        </div>
+        <div class="form-group">
+          <label>Category</label>
+          <%= select_tag :category, options_from_collection_for_select(Category.all, :id, :name), class: "form-control input-lg" %>
+        </div>
+        <div class="form-group">
+          <label>Location</label>
+          <%= text_field_tag :location, nil, placeholder: "Osaka, umeda, etc", class: "form-control input-lg" %>
+        </div>
+        <br>
+        <%= submit_tag "Search", class: "btn btn-primary btn-block input-lg" %>
+      <% end %>
     </div>
     <div class="col-xs-12 col-md-9">
       <h3>Gigs
