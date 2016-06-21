@@ -1,12 +1,4 @@
 <div class="container">
-  <h1>Your search resulted in | <strong><%= @gigs.total_count %></strong> gigs.</h1>
-  <%= form_tag search_gigs_path, method: :get do |f| %>
-    <%= text_field_tag :search, nil, placeholder: "Example Software Developer", class: "col-md-9" %>
-    <%= submit_tag "Search", class: "col-md-3 btn btn-primary" %>
-  <% end %>
-</div>
-
-<div class="container">
   <div class="row">
     <div class="col-xs-12 col-md-3">
       <h3 class="">Advanced search</h3>
@@ -29,22 +21,38 @@
     </div>
     <div class="col-xs-12 col-md-9">
       <h3>Gigs
-        <span class="pull-right"><small>1 - 20 results</small></span>
+        <div class="pull-right">
+          <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              Sort by
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <li><%= link_to "Oldest", gigs_path(sort_by: "oldest") %></li>
+              <li><%= link_to "Newest", gigs_path(sort_by: "newest") %></li>
+              <li><%= link_to "Name", gigs_path(sort_by: "name") %></li>
+            </ul>
+          </div>
+        </div>
       </h3>
       <table class="table table-striped" >
         <tbody>
           <% @gigs.each do |gig| %>
           <tr>
-            <td>
+            <td class="col-md-6">
               <p>
                 <%= link_to gig.name, gig %>
-                <small class="label label-success">Full time</small>
+                <small class="label label-success"><%= number_to_currency(gig.budget, precision: 0) %></small>
               </p>
-              <p>Google enterprises</p>
+              <p><%= h truncate(gig.description, length: 500) %></p>
+              <p>Skills: <%= gig.skills.map { |s| s.name }.join(", ") %></p>
             </td>
             <td>
-              <p><i class="glyphicon glyphicon-calendar"><%= gig.created_at %></i></p>
-              <p><i class="glyphicon glyphicon-map-marker"></i><%= gig.location %></p>
+              <%= gig.category.name %>
+            </td>
+            <td>
+              <p><i class="fa fa-calendar"> <%= gig.created_at %></i></p>
+              <p><i class="fa fa-map-marker"></i> <%= gig.location %></p>
             </td>
           </tr>
           <% end %>
