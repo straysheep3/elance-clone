@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <%= simple_form_for @gig do |f| %>
+        <div class="col-md-6">
+          <div class="form-group">
+            <%= f.input :name, class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <%= f.label :category_id %>
+            <%= f.select :category_id, options_from_collection_for_select(Category.all, :id, :name), {}, class: "form-control input-lg" %>
+            <small>choose category</small>
+          </div>
+          <div class="form-group">
+            <%= f.input :location, class: "form-control" %>
+          </div>
+          <div class="form-group">
+            <%= f.input :description, input_html: { row: 20 }, class: "form-control" %>
+          </div>
+          <legend>List Skills required for this gig.</legend>
+          <div class="form-group">
+            <%= f.text_area :skill_list, rows: 3, class: "form-control" %>
+            <small class="help-block">Separate skills with a comma.</small>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <%= f.input :budget, class: "form-control" %>
+          </div>
+          <%= f.button :submit, class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
