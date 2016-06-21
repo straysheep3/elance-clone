@@ -33,6 +33,10 @@ class GigsController < ApplicationController
     @gigs = Gig.search(params).page(params[:page]).per(25)
   end
 
+  def mygigs
+    @gigs = Gig.where(user_id: current_user).order("created_at desc")
+  end
+
   private
     def gig_params
       params.require(:gig).permit(:name, :location, :description, :budget, :category_id, :skill_list, :awarded_proposal)
